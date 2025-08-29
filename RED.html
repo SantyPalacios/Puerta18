@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de Requerimiento Energético Diario</title>
+</head>
+<body>
+  <h2>Calculadora de RED</h2>
+
+  <label>Sexo:</label>
+  <select id="sexo">
+    <option value="hombre">Hombre</option>
+    <option value="mujer">Mujer</option>
+  </select><br><br>
+
+  <label>Peso (kg):</label>
+  <input type="number" id="peso"><br><br>
+
+  <label>Altura (cm):</label>
+  <input type="number" id="altura"><br><br>
+
+  <label>Edad (años):</label>
+  <input type="number" id="edad"><br><br>
+
+  <label>Actividad física:</label>
+  <select id="actividad">
+    <option value="1.2">Sedentario</option>
+    <option value="1.375">Ligera (1-3 días/semana)</option>
+    <option value="1.55">Moderada (3-5 días/semana)</option>
+    <option value="1.725">Intensa (6-7 días/semana)</option>
+    <option value="1.9">Muy intensa (doble sesión)</option>
+  </select><br><br>
+
+  <button onclick="calcularRED()">Calcular RED</button>
+
+  <p id="resultado"></p>
+
+  <script>
+    function calcularRED() {
+      const sexo = document.getElementById('sexo').value;
+      const peso = parseFloat(document.getElementById('peso').value);
+      const altura = parseFloat(document.getElementById('altura').value);
+      const edad = parseInt(document.getElementById('edad').value);
+      const actividad = parseFloat(document.getElementById('actividad').value);
+
+      if (isNaN(peso) || isNaN(altura) || isNaN(edad)) {
+        document.getElementById('resultado').textContent = "Por favor, completa todos los campos con valores válidos.";
+        return;
+      }
+
+      let GEB = 0;
+      if (sexo === 'hombre') {
+        GEB = (10 * peso) + (6.25 * altura) - (5 * edad) + 5;
+      } else {
+        GEB = (10 * peso) + (6.25 * altura) - (5 * edad) - 161;
+      }
+
+      const RED = GEB * actividad;
+
+      document.getElementById('resultado').textContent = `Tu requerimiento energético diario es de aproximadamente ${Math.round(RED)} kcal.`;
+    }
+  </script>
+</body>
+</html>

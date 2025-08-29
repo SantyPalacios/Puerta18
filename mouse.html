@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulador del Mouse</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: #f0f0f0;
+      cursor: none; /* Oculta el cursor real */
+    }
+
+    #cursor {
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      border-radius: 50%;
+      position: absolute;
+      pointer-events: none; /* No bloquea clics reales */
+      transition: transform 0.05s linear;
+    }
+  </style>
+</head>
+<body>
+  <div id="cursor"></div>
+
+  <script>
+    const cursor = document.getElementById("cursor");
+
+    document.addEventListener("mousemove", function(event) {
+      cursor.style.left = event.pageX + "px";
+      cursor.style.top = event.pageY + "px";
+    });
+  </script>
+</body>
+</html>
+
+
+
